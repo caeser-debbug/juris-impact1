@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juris-Impact Consult | Cabinet Juridique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        .hero-gradient {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+        }
+        .service-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .service-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(30, 64, 175, 0.95);
+            padding: 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+            height: calc(100% - 48px);
+            display: flex;
+            flex-direction: column;
+        }
+        .service-card:hover .service-content {
+            transform: translateY(0);
+        }
+        .service-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(30, 64, 175, 0.95);
+            padding: 1rem;
+            transition: all 0.4s ease;
+        }
+        .service-card:hover .service-title {
+            opacity: 0;
+        }
+        .custom-shape-divider {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+        .custom-shape-divider svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 70px;
+        }
+        .custom-shape-divider .shape-fill {
+            fill: #F9FAFB;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-gray-50">
+    <!-- Header Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="h-16 w-16 relative">
+                    <svg viewBox="0 0 100 100" class="w-full h-full">
+                        <polygon points="20,10 80,10 90,50 80,90 20,90 10,50" fill="#3B82F6" />
+                        <rect x="40" y="20" width="20" height="60" fill="#1E40AF" />
+                        <path d="M30,30 Q50,20 70,30" stroke="white" fill="none" stroke-width="3" />
+                        <circle cx="30" cy="40" r="10" fill="white" />
+                        <circle cx="70" cy="40" r="10" fill="white" />
+                        <rect x="30" y="80" width="40" height="5" fill="white" />
+                    </svg>
+                </div>
+                <div class="ml-2">
+                    <h1 class="text-2xl font-bold text-blue-800">Juris-Impact Consult</h1>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button class="lg:hidden text-gray-600 hover:text-blue-800 focus:outline-none" id="menuButton">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex space-x-6 text-gray-600">
+                <a href="#" class="font-medium hover:text-blue-800 border-b-2 border-blue-800 py-1">Accueil</a>
+                <div class="relative group">
+                    <button class="font-medium hover:text-blue-800 flex items-center py-1 group-hover:border-b-2 group-hover:border-blue-800">
+                        À Propos
+                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10">
+                        <a href="#" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-800">À Propos</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-800">L'Équipe</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-800">FAQ</a>
+                    </div>
+                </div>
+                <a href="#" class="font-medium hover:text-blue-800 hover:border-b-2 hover:border-blue-800 py-1">Domaines De Pratique</a>
+                <a href="#" class="font-medium hover:text-blue-800 hover:border-b-2 hover:border-blue-800 py-1">Actualités</a>
+                <a href="#" class="font-medium hover:text-blue-800 hover:border-b-2 hover:border-blue-800 py-1">Contact</a>
+            </nav>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <div class="lg:hidden hidden bg-white w-full shadow-lg" id="mobileMenu">
+            <div class="container mx-auto px-4 py-3">
+                <a href="#" class="block py-2 font-medium text-blue-800">Accueil</a>
+                <div class="py-2">
+                    <button class="w-full text-left font-medium flex items-center justify-between" id="mobileSubMenuButton">
+                        À Propos
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="pl-4 hidden" id="mobileSubMenu">
+                        <a href="#" class="block py-2 hover:text-blue-800">À Propos</a>
+                        <a href="#" class="block py-2 hover:text-blue-800">L'Équipe</a>
+                        <a href="#" class="block py-2 hover:text-blue-800">FAQ</a>
+                    </div>
+                </div>
+                <a href="#" class="block py-2 font-medium hover:text-blue-800">Domaines De Pratique</a>
+                <a href="#" class="block py-2 font-medium hover:text-blue-800">Actualités</a>
+                <a href="#" class="block py-2 font-medium hover:text-blue-800">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen max-h-[600px]">
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-900 to-blue-700 hero-gradient">
+            <img src="img/logo.jpg" alt="Cabinet juridique" class="w-full h-full object-cover mix-blend-overlay">
+        </div>
+        <div class="relative container mx-auto px-4 h-full flex flex-col justify-center items-center text-white text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">Avec nous, vos affaires sont <br><span class="text-blue-300">sécurisées et bien traitées</span></h1>
+            <p class="text-lg md:text-xl mb-10 max-w-2xl">Votre partenaire juridique de confiance au Niger. Notre expertise à votre service.</p>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="#" class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-3 px-8 rounded-md transition duration-300 uppercase tracking-wider shadow-lg hover:shadow-xl transform hover:-translate-y-1">Fixer un rendez-vous</a>
+                <a href="#" class="bg-transparent border-2 border-white hover:bg-white hover:text-blue-800 text-white font-bold py-3 px-8 rounded-md transition duration-300 uppercase tracking-wider">Nos services</a>
+            </div>
+        </div>
+        <div class="custom-shape-divider">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Welcome Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-4">Bienvenue</h2>
+                <div class="w-24 h-1 bg-blue-800 mx-auto mb-8"></div>
+                <p class="text-lg text-gray-700 mb-8 leading-relaxed">Voir Grand, Aller Plus Loin. Juris-Impact Consult est un cabinet d'avocats offrant une gamme complète de services juridiques aux entreprises et aux particuliers au Niger et dans toute l'Afrique de l'Ouest.</p>
+                <div class="flex justify-center space-x-8 mt-12">
+                    <div class="text-center">
+                        <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-balance-scale text-blue-800 text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold">Excellence Juridique</h3>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-handshake text-blue-800 text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold">Partenariat de Confiance</h3>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-globe-africa text-blue-800 text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold">Présence Régionale</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Nos Services</h2>
+                <div class="w-24 h-1 bg-blue-800 mx-auto mb-6"></div>
+                <p class="max-w-2xl mx-auto text-gray-600">Des solutions juridiques adaptées à vos besoins spécifiques, avec une expertise reconnue dans divers domaines du droit.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Service 1 -->
+                <div class="service-card bg-white rounded-xl shadow-lg overflow-hidden">
+                    <img src="img/logo.jpg" alt="Service de médiation" class="w-full h-64 object-cover">
+                    <div class="service-title">
+                        <div class="flex items-center">
+                            <i class="fas fa-users mr-3 text-2xl text-white"></i>
+                            <h3 class="text-xl font-bold uppercase text-white">Médiateur Professionnel</h3>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-users mr-3 text-2xl text-white"></i>
+                            <h3 class="text-xl font-bold uppercase text-white">Médiateur Professionnel</h3>
+                        </div>
+                        <p class="text-gray-100 mb-4">Résolution de conflits et médiation entre parties pour trouver des solutions amiables.</p>
+                        <div class="mt-auto">
+                            <a href="#" class="inline-block text-white bg-blue-900 hover:bg-blue-950 py-2 px-4 rounded-md font-medium transition-all duration-300">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-white rounded-xl shadow-lg overflow-hidden">
+                    <img src="img/logo.jpg" alt="Service d'administration de biens" class="w-full h-64 object-cover">
+                    <div class="service-title">
+                        <div class="flex items-center">
+                            <i class="fas fa-home mr-3 text-2xl text-white"></i>
+                            <h3 class="text-xl font-bold uppercase text-white">Administration de Biens</h3>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-home mr-3 text-2xl text-white"></i>
+                            <h3 class="text-xl font-bold uppercase text-white">Administration de Biens</h3>
+                        </div>
+                        <p class="text-gray-100 mb-4">Gestion complète de patrimoine immobilier et conseil en investissement.</p>
+                        <div class="mt-auto">
+                            <a href="#" class="inline-block text-white bg-blue-900 hover:bg-blue-950 py-2 px-4 rounded-md font-medium transition-all duration-300">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-white rounded-xl shadow-lg overflow-hidden">
+                    <img src="img/logo.jpg" alt="Service de conseil juridique" class="w-full h-64 object-cover">
+                    <div class="service-title">
+                        <div class="flex items-center">
+                            <i class="fas fa-gavel mr-3 text-2xl text-white"></i>
+                            <h3 class="text-xl font-bold uppercase text-white">Conseil Juridique</h3>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-gavel mr-3 text-2xl text-white"></i>
+                            <h3 class="text-xl font-bold uppercase text-white">Conseil Juridique</h3>
+                        </div>
+                        <p class="text-gray-100 mb-4">Expertise légale pour vos projets et protection de vos intérêts dans tous les domaines du droit.</p>
+                        <div class="mt-auto">
+                            <a href="#" class="inline-block text-white bg-blue-900 hover:bg-blue-950 py-2 px-4 rounded-md font-medium transition-all duration-300">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Témoignages</h2>
+                <div class="w-24 h-1 bg-blue-800 mx-auto mb-6"></div>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-xl shadow-lg p-8 relative">
+                    <div class="absolute -top-6 left-1/2 transform -translate-x-1/2">
+                        <div class="w-12 h-12 bg-blue-800 rounded-full flex items-center justify-center text-white shadow-lg">
+                            <i class="fas fa-quote-right"></i>
+                        </div>
+                    </div>
+                    <blockquote class="text-lg text-center pt-6 mb-6">
+                        <p class="mb-6 italic">Nous avons été très impressionnés par leur professionnalisme et leur souci du détail.</p>
+                        <p>Nous avons fait appel à Juris-Impact Consult au cours des 12 derniers mois et nous avons été très impressionnés par leur professionnalisme, leur souci du détail, leur capacité à respecter un cahier des charges et à travailler dans les délais impartis.</p>
+                    </blockquote>
+                    <div class="flex justify-center">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-800 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-md">
+                                C
+                            </div>
+                            <div class="ml-4">
+                                <p class="font-bold">Client Satisfait</p>
+                                <p class="text-gray-600">Directeur Général</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-center mt-8">
+                    <div class="flex space-x-2">
+                        <button class="w-3 h-3 rounded-full bg-blue-800"></button>
+                        <button class="w-3 h-3 rounded-full bg-gray-300 hover:bg-blue-800 transition-all"></button>
+                        <button class="w-3 h-3 rounded-full bg-gray-300 hover:bg-blue-800 transition-all"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Nos Partenaires</h2>
+                <div class="w-24 h-1 bg-blue-800 mx-auto mb-6"></div>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="flex items-center justify-center p-4 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition-all transform hover:-translate-y-1">
+                    <img src="img/logo.jpg" alt="NIGELEC Logo" class="max-h-24">
+                </div>
+                <div class="flex items-center justify-center p-4 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition-all transform hover:-translate-y-1">
+                    <img src="img/logo.jpg" alt="SEEN Logo" class="max-h-24">
+                </div>
+                <div class="flex items-center justify-center p-4 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition-all transform hover:-translate-y-1">
+                    <img src="img/logo.jpg" alt="Partner Logo" class="max-h-24">
+                </div>
+                <div class="flex items-center justify-center p-4 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition-all transform hover:-translate-y-1">
+                    <img src="img/logo.jpg" alt="Partner Logo" class="max-h-24">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-gradient-to-r from-blue-800 to-blue-900 text-white relative">
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h2 class="text-3xl font-bold mb-6">Souhaitez-vous une consultation juridique ?</h2>
+            <p class="text-lg mb-10 max-w-2xl mx-auto">Notre équipe d'experts est prête à vous aider dans vos démarches juridiques. Contactez-nous dès aujourd'hui.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#" class="bg-white text-blue-800 hover:bg-gray-100 font-bold py-3 px-8 rounded-md transition duration-300 shadow-lg hover:shadow-xl">Fixer un rendez-vous</a>
+                <a href="#" class="bg-transparent border-2 border-white hover:bg-white hover:text-blue-800 text-white font-bold py-3 px-8 rounded-md transition duration-300">Nous contacter</a>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="w-full h-full">
+                <path fill="#1F2937" fill-opacity="1" d="M0,192L60,176C120,160,240,128,360,133.3C480,139,600,181,720,197.3C840,213,960,203,1080,176C1200,149,1320,107,1380,85.3L1440,64L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 pt-20">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="h-12 w-12 relative">
+                            <svg viewBox="0 0 100 100" class="w-full h-full">
+                                <polygon points="20,10 80,10 90,50 80,90 20,90 10,50" fill="#3B82F6" />
+                                <rect x="40" y="20" width="20" height="60" fill="#1E40AF" />
+                                <path d="M30,30 Q50,20 70,30" stroke="white" fill="none" stroke-width="3" />
+                                <circle cx="30" cy="40" r="10" fill="white" />
+                                <circle cx="70" cy="40" r="10" fill="white" />
+                                <rect x="30" y="80" width="40" height="5" fill="white" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold ml-2">Juris-Impact Consult</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">Juris-Impact Consult est un cabinet juridique de premier plan au Niger, offrant des services juridiques complets pour les entreprises et les particuliers.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-6 border-b border-gray-700 pb-2">Services</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-all flex items-center"><i class="fas fa-chevron-right mr-2 text-sm text-blue-400"></i>Conseil Juridique</a></li>
+                        <li><a href="#" class="hover:text-white transition-all flex items-center"><i class="fas fa-chevron-right mr-2 text-sm text-blue-400"></i>Médiation</a></li>
+                        <li><a href="#" class="hover:text-white transition-all flex items-center"><i class="fas fa-chevron-right mr-2 text-sm text-blue-400"></i>Administration de Biens</a></li>
+                        <li><a href="#" class="hover:text-white transition-all flex items-center"><i class="fas fa-chevron-right mr-2 text-sm text-blue-400"></i>Droit des Affaires</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-6 border-b border-gray-700 pb-2">Contact</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-center"><i class="fas fa-map-marker-alt mr-3 text-blue-400"></i> Niamey, Niger</li>
+                        <li class="flex items-center"><i class="fas fa-phone mr-3 text-blue-400"></i> +227 XX XX XX XX</li>
+                        <li class="flex items-center"><i class="fas fa-envelope mr-3 text-blue-400"></i> contact@juris-impact.com</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-6 border-b border-gray-700 pb-2">Suivez-nous</h3>
+                    <div class="flex space-x-4 mb-6">
+                        <a href="#" class="bg-gray-800 hover:bg-blue-600 h-10 w-10 rounded-full flex items-center justify-center transition-all">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="bg-gray-800 hover:bg-blue-400 h-10 w-10 rounded-full flex items-center justify-center transition-all">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="bg-gray-800 hover:bg-red-600 h-10 w-10 rounded-full flex items-center justify-center transition-all">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="bg-gray-800 hover:bg-pink-600 h-10 w-10 rounded-full flex items-center justify-center transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                    <div>
+                        <h4 class="font-medium mb-2">Newsletter</h4>
+                        <div class="flex">
+                            <input type="email" placeholder="Votre email" class="bg-gray-800 text-white px-3 py-2 rounded-l-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <button class="bg-blue-700 hover:bg-blue-800 px-4 py-2 rounded-r-md transition-all">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
+                <p>&copy; 2025 Juris-Impact Consult. Tous droits réservés.</p>
+                <div class="mt-4 flex justify-center space-x-4">
+                    <a href="#" class="hover:text-blue-400 transition-all">Mentions légales</a>
+                    <span>|</span>
+                    <a href="#" class="hover:text-blue-400 transition-all">Politique de confidentialité</a>
+                    <span>|</span>
+                    <a href="#" class="hover:text-blue-400 transition-all">Plan du site</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <a href="#" class="fixed bottom-8 right-8 bg-blue-800 text-white h-12 w-12 rounded-full flex items-center justify-center shadow-lg hover:bg-blue-900 transition duration-300 opacity-0" id="backToTop">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+        </svg>
+    </a>
+
+    <!-- JavaScript for mobile menu and scroll effects -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const menuButton = document.getElementById('menuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileSubMenuButton = document.getElementById('mobileSubMenuButton');
+            const mobileSubMenu = document.getElementById('mobileSubMenu');
+            
+            menuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            mobileSubMenuButton.addEventListener('click', function() {
+                mobileSubMenu.classList.toggle('hidden');
+            });
+            
+            // Back to top button
+            const backToTopButton = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.remove('opacity-0');
+                    backToTopButton.classList.add('opacity-100');
+                } else {
+                    backToTopButton.classList.remove('opacity-100');
+                    backToTopButton.classList.add('opacity-0');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Add scroll reveal effects
+            const revealElements = document.querySelectorAll('.service-card, .partners-logo');
+            
+            function checkReveal() {
+                for (let i = 0; i < revealElements.length; i++) {
+                    const windowHeight = window.innerHeight;
+                    const elementTop = revealElements[i].getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < windowHeight - elementVisible) {
+                        revealElements[i].classList.add('opacity-100');
+                        revealElements[i].classList.remove('opacity-0', 'translate-y-10');
+                    }
+                }
+            }
+            
+            window.addEventListener('scroll', checkReveal);
+            checkReveal();
+        });
+    </script>
+</body>
+</html>
